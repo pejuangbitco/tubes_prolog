@@ -4,6 +4,7 @@ const behaviors = ['ayahnya', 'pacarnya', 'kakeknya']
 let term = `format input harus 3 kata, yaitu [subject behavior subject] <br>subject yang ada: ${name}
 			<br>behavior yang ada: ${behaviors}`
 let kata=''
+let warning='format inputan salah'
 
 document.getElementById("term").innerHTML=term;			
 
@@ -13,7 +14,7 @@ const jalan = () => {
 	input = input.split(" ")	
 	
 	if(input.length < 3 || input.length > 3) {
-		document.getElementById("hasil").innerHTML = 'format inputan salah'
+		document.getElementById("hasil").innerHTML = warning
 		return
 	}
 
@@ -21,27 +22,33 @@ const jalan = () => {
 	let behavior = ''
 	let name2 = ''
 
-	for (let i = 0; i < input.length; i++) {
-		if(i==0) {
-			name.forEach( element => {
-				if(element==input[i]) {
-					name1=element
-				}
-			})
-		} else if (i==1) {
-			behaviors.forEach( element => {
-				if(element==input[i]) {
-					behavior=element
-				}
-			})
-		} else if(i==2) {
-			name.forEach( element => {
-				if(element==input[i]) {
-					name2=element
-				}
-			})
+
+	name.forEach( element => {
+		if(element==input[0]) {
+			if(input[0]=='y') {
+				kata=warning
+				return;
+			}
+			name1=element			
 		}
-	}
+	})
+
+	behaviors.forEach( element => {
+		if(element==input[1]) {
+			behavior=element
+		}
+	})
+
+	name.forEach( element => {
+		if(element==input[2]) {
+			if(input[2]=='x') {
+				kata=warning
+				return;
+			}
+			name2=element			
+		}
+	})
+		
 
 	if(name1=='' || behavior=='' || name2=='') {
 		document.getElementById("hasil").innerHTML = 'format inputan salah'
@@ -88,13 +95,50 @@ const ayah = (x='x', y='y') => {
 
 const pacar = (x, y) => {
 	
-	if(x=='x' || y=='y') {
-		if (x=='x' && y=='rani')
-			kata='x= irfan'
-		else if (x=='irfan' && y=='y')
-			kata=' y= rani'
-		else
-			kata='x= irfan, y= rani'
+	// if(x=='x' || y=='y') {
+	// 	if (x=='x' && y=='y')
+	// 		kata='x= irfan, y= rani'
+	// 	else if (x=='x') {
+	// 		switch(y) {
+	// 			case 'rani': kata='x= irfan'
+	// 				break;
+	// 			case 'irfan': kata='x= rani'
+	// 				break;
+	// 		}
+	// 	} else {
+	// 		switch(x) {
+	// 			case 'rani': kata='y= irfan'
+	// 				break;
+	// 			case 'irfan': kata='y= rani'
+	// 				break;
+	// 		}
+	// 	}			
+	// } else {
+	// 	if(x=='irfan' && y=='rani' || x=='rani' && y=='irfan') {
+	// 		kata='true'
+	// 	} else {
+	// 		kata='false'
+	// 	}
+	// }
+	
+	if(x=='x' && y=='y')
+		kata='x= irfan, y= rani'
+	else if(x=='x') {
+		switch(y) {
+			case 'rani': kata='x= irfan'
+				break;
+			case 'irfan': kata='x= rani'
+				break;
+			default: kata='false'
+		}
+	} else if(y=='y') {
+		switch(x) {
+			case 'rani': kata='y= irfan'
+				break;
+			case 'irfan': kata='y= rani'
+				break;
+			default: kata='false'
+		}
 	} else {
 		if(x=='irfan' && y=='rani' || x=='rani' && y=='irfan') {
 			kata='true'
@@ -102,7 +146,6 @@ const pacar = (x, y) => {
 			kata='false'
 		}
 	}
-	
 }
 
 const kakek = (x, y) => {	
