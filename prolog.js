@@ -18,9 +18,11 @@ const jalan = () => {
 		return
 	}
 
-	let name1 = ''
-	let behavior = ''
-	let name2 = ''
+	let string = {
+		name1 : '',
+		behavior : '',
+		name2 : ''
+	}
 
 
 	name.forEach( element => {
@@ -29,13 +31,13 @@ const jalan = () => {
 				kata=warning
 				return;
 			}
-			name1=element			
+			string.name1=element			
 		}
 	})
 
 	behaviors.forEach( element => {
 		if(element==input[1]) {
-			behavior=element
+			string.behavior=element
 		}
 	})
 
@@ -45,22 +47,22 @@ const jalan = () => {
 				kata=warning
 				return;
 			}
-			name2=element			
+			string.name2=element			
 		}
 	})
 		
 
-	if(name1=='' || behavior=='' || name2=='') {
-		document.getElementById("hasil").innerHTML = 'format inputan salah'
+	if(string.name1=='' || string.behavior=='' || string.name2=='') {
+		document.getElementById("hasil").innerHTML = warning
 		return;
 	} else {		
 
-		if(behavior=='ayahnya') {
-			ayah(name1,name2)						
-		} else if (behavior=='pacarnya') {
-			pacar(name1,name2)
-		} else if (behavior=='kakeknya') {
-			kakek(name1,name2)
+		if(string.behavior=='ayahnya') {
+			ayah(string.name1,string.name2)						
+		} else if (string.behavior=='pacarnya') {
+			pacar(string.name1,string.name2)
+		} else if (string.behavior=='kakeknya') {
+			kakek(string.name1,string.name2)
 		}
 
 		document.getElementById("hasil").innerHTML = kata
@@ -93,33 +95,7 @@ const ayah = (x='x', y='y') => {
 
 }
 
-const pacar = (x, y) => {
-	
-	// if(x=='x' || y=='y') {
-	// 	if (x=='x' && y=='y')
-	// 		kata='x= irfan, y= rani'
-	// 	else if (x=='x') {
-	// 		switch(y) {
-	// 			case 'rani': kata='x= irfan'
-	// 				break;
-	// 			case 'irfan': kata='x= rani'
-	// 				break;
-	// 		}
-	// 	} else {
-	// 		switch(x) {
-	// 			case 'rani': kata='y= irfan'
-	// 				break;
-	// 			case 'irfan': kata='y= rani'
-	// 				break;
-	// 		}
-	// 	}			
-	// } else {
-	// 	if(x=='irfan' && y=='rani' || x=='rani' && y=='irfan') {
-	// 		kata='true'
-	// 	} else {
-	// 		kata='false'
-	// 	}
-	// }
+const pacar = (x, y) => {	
 	
 	if(x=='x' && y=='y')
 		kata='x= irfan, y= rani'
